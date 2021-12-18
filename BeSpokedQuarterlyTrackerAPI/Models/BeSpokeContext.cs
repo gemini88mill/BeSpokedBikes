@@ -5,6 +5,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BeSpokedQuarterlyTrackerAPI.Models
 {
+    /// <summary>
+    /// BeSpokeContext - used to mimic a Database in the absense of one. Creates a list of Datalayer object outlined in
+    /// the requirements. This object is used as a singleton, Dependancy Injected into the service in Startup.cs. 
+    /// </summary>
     public class BeSpokeContext
     {
         public List<Customer> Customers { get; set; }
@@ -165,6 +169,7 @@ namespace BeSpokedQuarterlyTrackerAPI.Models
                     Customer = Customers.FirstOrDefault(x => x.CustomerId == 1),
                     Product = Products.FirstOrDefault(x => x.ProductId == 1),
                     SalesPerson = SalesPersons.FirstOrDefault(x => x.SalespersonId == 2),
+                    SalesId = 1
                 },
                 new Sales
                 {
@@ -172,6 +177,7 @@ namespace BeSpokedQuarterlyTrackerAPI.Models
                     Customer = Customers.FirstOrDefault(x => x.CustomerId == 2),
                     Product = Products.FirstOrDefault(x => x.ProductId == 2),
                     SalesPerson = SalesPersons.FirstOrDefault(x => x.SalespersonId == 2),
+                    SalesId = 2
                 },
                 new Sales
                 {
@@ -179,6 +185,7 @@ namespace BeSpokedQuarterlyTrackerAPI.Models
                     Customer = Customers.FirstOrDefault(x => x.CustomerId == 3),
                     Product = Products.FirstOrDefault(x => x.ProductId == 3),
                     SalesPerson = SalesPersons.FirstOrDefault(x => x.SalespersonId == 1),
+                    SalesId = 3
                 },
                 new Sales
                 {
@@ -186,6 +193,7 @@ namespace BeSpokedQuarterlyTrackerAPI.Models
                     Customer = Customers.FirstOrDefault(x => x.CustomerId == 3),
                     Product = Products.FirstOrDefault(x => x.ProductId == 1),
                     SalesPerson = SalesPersons.FirstOrDefault(x => x.SalespersonId == 3),
+                    SalesId = 4
                 },
             };
 

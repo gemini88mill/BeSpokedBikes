@@ -8,14 +8,21 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
     [Route("[controller]")]
     public class CustomerController : ControllerBase
     {
+        private BeSpokeContext _context { get; set; }
+        
+        public CustomerController(BeSpokeContext context)
+        {
+            _context = context;
+        }
+        
         /// <summary>
         /// Gets the complete list of customers. 
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> GetCustomers()
+        public IActionResult GetCustomers()
         {
-            return Ok(new BeSpokeContext().Customers);
+            return Ok(_context.Customers);
         }
     }
 }
