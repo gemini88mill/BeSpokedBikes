@@ -27,6 +27,8 @@ namespace BeSpokedQuarterlyTrackerAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
+            
             // DI'd 
             services.AddSingleton<BeSpokeContext>();
             services.AddControllers();
@@ -46,6 +48,7 @@ namespace BeSpokedQuarterlyTrackerAPI
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BeSpokedQuarterlyTrackerAPI v1"));
             }
 
+            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseHttpsRedirection();
 
             app.UseRouting();
