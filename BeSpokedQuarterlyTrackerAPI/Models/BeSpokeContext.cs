@@ -169,7 +169,9 @@ namespace BeSpokedQuarterlyTrackerAPI.Models
                     Customer = Customers.FirstOrDefault(x => x.CustomerId == 1),
                     Product = Products.FirstOrDefault(x => x.ProductId == 1),
                     SalesPerson = SalesPersons.FirstOrDefault(x => x.SalespersonId == 2),
-                    SalesId = 1
+                    SalesId = 1,
+                    SalePrice = 1029.99m,
+                    CommissionAwarded = 129.99m
                 },
                 new Sales
                 {
@@ -177,7 +179,9 @@ namespace BeSpokedQuarterlyTrackerAPI.Models
                     Customer = Customers.FirstOrDefault(x => x.CustomerId == 2),
                     Product = Products.FirstOrDefault(x => x.ProductId == 2),
                     SalesPerson = SalesPersons.FirstOrDefault(x => x.SalespersonId == 2),
-                    SalesId = 2
+                    SalesId = 2,
+                    SalePrice = 500.00m,
+                    CommissionAwarded = 10m
                 },
                 new Sales
                 {
@@ -185,7 +189,9 @@ namespace BeSpokedQuarterlyTrackerAPI.Models
                     Customer = Customers.FirstOrDefault(x => x.CustomerId == 3),
                     Product = Products.FirstOrDefault(x => x.ProductId == 3),
                     SalesPerson = SalesPersons.FirstOrDefault(x => x.SalespersonId == 1),
-                    SalesId = 3
+                    SalesId = 3,
+                    SalePrice = 700m,
+                    CommissionAwarded = 70m
                 },
                 new Sales
                 {
@@ -193,7 +199,9 @@ namespace BeSpokedQuarterlyTrackerAPI.Models
                     Customer = Customers.FirstOrDefault(x => x.CustomerId == 3),
                     Product = Products.FirstOrDefault(x => x.ProductId == 1),
                     SalesPerson = SalesPersons.FirstOrDefault(x => x.SalespersonId == 3),
-                    SalesId = 4
+                    SalesId = 4,
+                    SalePrice = 1029.99m,
+                    CommissionAwarded = 61.74m
                 },
             };
 

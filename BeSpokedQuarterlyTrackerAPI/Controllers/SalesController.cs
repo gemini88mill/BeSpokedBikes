@@ -39,8 +39,8 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
                     SalesPersonName = item.SalesPerson.FirstName.Trim() + " " + item.SalesPerson.LastName.Trim(),
                     SalesId = item.SalesId,
                     SaleDate = item.SalesDate,
-                    Price = item.Product.SalePrice,
-                    Commission = item.Product.SalePrice * (item.Product.CommissionPct / 100),
+                    Price = item.SalePrice,
+                    Commission = item.CommissionAwarded,
                     CustomerName = item.Customer.FirstName.Trim() + " " + item.Customer.LastName.Trim()
                 });
             }
@@ -61,15 +61,18 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
             var salesperson = _context.SalesPersons.FirstOrDefault(x => x.SalespersonId == nsm.SalesPersonId);
             var product = _context.Products.FirstOrDefault(x => x.ProductId == nsm.ProductId);
             var salesCount = _context.Sales.Count + 1;
-            
-            _context.Sales.Add(new Sales
-            {
-                Customer = customers,
-                Product = product,
-                SalesPerson = salesperson,
-                SalesDate = DateTime.Now,
-                SalesId = salesCount
-            });
+
+            if (product != null)
+                _context.Sales.Add(new Sales
+                {
+                    Customer = customers,
+                    Product = product,
+                    SalesPerson = salesperson,
+                    SalesDate = DateTime.Now,
+                    SalesId = salesCount,
+                    SalePrice = product.SalePrice,
+                    CommissionAwarded = product.SalePrice * (product.CommissionPct / 100)
+                });
 
             return Ok();
         }
