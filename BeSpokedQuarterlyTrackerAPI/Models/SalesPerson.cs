@@ -10,7 +10,7 @@ namespace BeSpokedQuarterlyTrackerAPI.Models
         public string Address { get; set; }
         public string Phone { get; set; }
         public DateTime StartDate { get; set; }
-        public DateTime TerminationDate { get; set; }
+        public DateTime? TerminationDate { get; set; }
         public string Manager { get; set; }
     }
 }

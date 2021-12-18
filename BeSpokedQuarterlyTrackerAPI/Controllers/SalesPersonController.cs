@@ -23,7 +23,7 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
         [HttpGet]
         public IActionResult GetSalesPersons()
         {
-            return Ok(new BeSpokeContext().SalesPersons);
+            return Ok(_context.SalesPersons);
         }
 
         /// <summary>

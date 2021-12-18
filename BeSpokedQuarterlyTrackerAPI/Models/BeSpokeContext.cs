@@ -119,7 +119,7 @@ namespace BeSpokedQuarterlyTrackerAPI.Models
                     Manufacturer = "SCOTT Sports SA",
                     Name = "Addict 2011",
                     Style = "Racing",
-                    ProductId = 4,
+                    ProductId = 5,
                     PurchasePrice = 299m,
                     CommissionPct = 1,
                     SalePrice = 399m,

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using BeSpokedQuarterlyTrackerAPI.Models;
 using BeSpokedQuarterlyTrackerAPI.Models.Dto;
@@ -20,7 +21,23 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
         [HttpGet]
         public IActionResult GetSales()
         {
-            return Ok(_context.Sales);
+            var allSales = _context.Sales;
+
+            var displaySalesList = new List<DisplaySalesModel>();
+            foreach (var item in allSales)
+            {
+                displaySalesList.Add(new DisplaySalesModel
+                {
+                    SalesPersonName = item.SalesPerson.FirstName.Trim() + " " + item.SalesPerson.LastName.Trim(),
+                    SalesId = item.SalesId,
+                    SaleDate = item.SalesDate,
+                    Price = item.Product.SalePrice,
+                    Commission = item.Product.SalePrice * (item.Product.CommissionPct / 100),
+                    CustomerName = item.Customer.FirstName.Trim() + " " + item.Customer.LastName.Trim()
+                });
+            }
+
+            return Ok(displaySalesList);
         }
 
         [HttpPost("NewSale")]
