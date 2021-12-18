@@ -15,11 +15,20 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
     {
         private BeSpokeContext _context { get; }
 
+        /// <summary>
+        /// Controller Constructor, Dependency Injected from Startup.cs
+        /// </summary>
+        /// <param name="context"></param>
         public ReportsController(BeSpokeContext context)
         {
             _context = context;
         }
 
+        /// <summary>
+        /// Quarterly Summary report controller - gets the sales information and groups the data by salesperson. 
+        /// </summary>
+        /// <param name="rpm"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult GetQuarterlyReport(ReportPeramsModel rpm)
         {

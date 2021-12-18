@@ -26,6 +26,13 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
             return Ok(_context.Products);
         }
 
+        /// <summary>
+        /// Updates the product object, I would imagine that there should be some restrictions, or adds instead of updates.
+        /// however, I don't have enough information to restrict at the moment, user could be requesting this vagueness, for
+        /// something that I currently don't have access to. 
+        /// </summary>
+        /// <param name="pum">Dto for production update</param>
+        /// <returns>200 ok result on completion of add, returns bad request on failure. </returns>
         [HttpPost("Update")]
         public IActionResult UpdateProduct(ProductUpdateModel pum)
         {

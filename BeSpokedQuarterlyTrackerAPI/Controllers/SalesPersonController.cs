@@ -29,10 +29,10 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
         /// <summary>
         /// Update a salesperson.
         /// Assumption: as a sales tracking application, start date and termination date should not be defined in this project
-        /// and something to update. 
+        /// and something to update. Start Date is set and Termination Date should not be defined in a tracking app. 
         /// </summary>
         /// <param name="uspm">update model for salesperson object</param>
-        /// <returns>Ok result on successful update</returns>
+        /// <returns>Ok result on successful update, 400 on null response from salesperson Data object</returns>
         [HttpPost("Update")]
         public IActionResult UpdateSalesPerson(UpdateSalesPersonModel uspm)
         {

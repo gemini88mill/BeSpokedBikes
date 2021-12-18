@@ -7,10 +7,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BeSpokedQuarterlyTrackerAPI.Controllers
 {
+    /// <summary>
+    /// Sales Controller - all actions related to the sales data object go here. 
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
     public class SalesController : ControllerBase
     {
+        // DI Component from startup.cs
         private BeSpokeContext _context { get; }
 
         public SalesController(BeSpokeContext context)
@@ -18,6 +22,10 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
             _context = context;
         }
         
+        /// <summary>
+        /// Gets all sales uses Dto model to display relevant data. 
+        /// </summary>
+        /// <returns>Dto representation of Sales. </returns>
         [HttpGet]
         public IActionResult GetSales()
         {
@@ -40,6 +48,11 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
             return Ok(displaySalesList);
         }
 
+        /// <summary>
+        /// Creates a new sale, a new sale is dependent on the Product, Customer and SalesPersons to be available. 
+        /// </summary>
+        /// <param name="nsm">New Sale Model Object. ID's of respective Data Object.</param>
+        /// <returns>Ok result on success</returns>
         [HttpPost("NewSale")]
         public IActionResult CreateSale(NewSaleModel nsm)
         {
