@@ -213,7 +213,8 @@ namespace BeSpokedQuarterlyTrackerAPI.Models
                     BeginDate = new DateTime(2021, 12, 01),
                     EndDate = new DateTime(2021, 12, 31),
                     DiscountId = 1,
-                    DiscountPct = 20
+                    DiscountPct = 20,
+                    DiscountName = "Happy Holidays Early Promo"
                 },
                 new Discount
                 {
@@ -221,7 +222,8 @@ namespace BeSpokedQuarterlyTrackerAPI.Models
                     BeginDate = new DateTime(2021, 11, 01),
                     EndDate = new DateTime(2021, 11, 30),
                     DiscountId = 2,
-                    DiscountPct = 50
+                    DiscountPct = 50,
+                    DiscountName = "Bogo 1"
                 },
                 new Discount
                 {
@@ -229,7 +231,8 @@ namespace BeSpokedQuarterlyTrackerAPI.Models
                     BeginDate = new DateTime(2021, 12, 01),
                     EndDate = new DateTime(2021, 12, 15),
                     DiscountId = 3,
-                    DiscountPct = 7
+                    DiscountPct = 7,
+                    DiscountName = "Good Neighbor"
                 },
 
             };

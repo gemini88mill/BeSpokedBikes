@@ -9,5 +9,6 @@ namespace BeSpokedQuarterlyTrackerAPI.Models
         public DateTime BeginDate { get; set; }
         public DateTime EndDate { get; set; }
         public decimal DiscountPct { get; set; }
+        public string DiscountName { get; set; }
     }
 }

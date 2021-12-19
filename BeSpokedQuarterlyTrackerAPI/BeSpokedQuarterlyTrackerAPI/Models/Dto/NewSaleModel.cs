@@ -7,6 +7,9 @@ namespace BeSpokedQuarterlyTrackerAPI.Models.Dto
         public int CustomerId { get; set; }
         public int SalesPersonId { get; set; }
         public int ProductId { get; set; }
+
+        public decimal SalePrice { get; set; }
+        public decimal CommissionAwarded { get; set; }
     }
 
     public class DisplaySalesModel
