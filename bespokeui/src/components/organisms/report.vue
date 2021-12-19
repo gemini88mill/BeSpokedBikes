@@ -63,7 +63,7 @@ export default {
           salespersonId: this.salespersonId
         })
       }).then(response => this.results = response.data)
-      .catch(err => console.log(err));
+      .catch(err => alert("something went wrong, please see console for details. " + err));
     }
   }
 }

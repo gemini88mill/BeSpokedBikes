@@ -130,8 +130,13 @@ export default {
           'Content-type': 'application/json'
         },
         data: JSON.stringify(payload)
-      }).then(response => this.products = response.data)
-          .catch(err => console.log(err))
+      }).then(response => {
+        this.products = response.data
+        alert("Success sale added");
+      }).catch(err => {
+        alert("something went wrong, please see console for details");
+        console.log(err);
+      })
     }
   },
 

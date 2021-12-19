@@ -87,6 +87,10 @@ export default {
           'Content-type': 'application/json'
         },
         data: JSON.stringify(payload)
+      }).then(response => alert("Success, salesperson updated" + response))
+      .catch(err => {
+        console.log(err);
+        alert("something went wrong, please see console for details")
       })
     },
     splitName: function (val) {

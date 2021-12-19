@@ -63,7 +63,11 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
             var product = _context.Products.FirstOrDefault(x => x.ProductId == nsm.ProductId);
             var salesCount = _context.Sales.Count + 1;
 
-            if (product == null) return BadRequest();
+            if (product == null) return BadRequest(new
+            {
+                response = "product not found"
+            });
+            
             _context.Sales.Add(new Sales
             {
                 Customer = customers,
@@ -77,7 +81,10 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
                 
             product.QtyOnHand--;
 
-            return Ok();
+            return Ok(new
+            {
+                Response = "Success"
+            });
         }
     }
 }

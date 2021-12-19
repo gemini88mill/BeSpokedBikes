@@ -55,7 +55,10 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
                     x.FirstName.Trim().Equals(uspm.FirstName.Trim(), StringComparison.InvariantCultureIgnoreCase) &&
                     x.LastName.Trim().Equals(uspm.LastName, StringComparison.InvariantCultureIgnoreCase)))
             {
-                return BadRequest();
+                return BadRequest(new
+                {
+                    response = result == null ? "Salesperson not found" : "Duplicate Name Found"
+                });
             }
             
             result.Address = uspm.Address ?? result.Address;
@@ -64,7 +67,10 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
             result.FirstName = uspm.FirstName ?? result.FirstName;
             result.LastName = uspm.LastName ?? result.LastName;
 
-            return Ok();
+            return Ok(new
+            {
+                response = "success"
+            });
         }
     }
 }

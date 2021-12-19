@@ -59,7 +59,7 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
         /// <summary>
         /// Product Add, controller method to add new products to inventory, includes a check for product duplicates.
         /// Note: the requirements do not state for this to be added to the system. It is possible that a future update
-        /// might require this to be needed but the current iteration does not call for it. leaving hidden for now. 
+        /// might require this to be needed but the current iteration does not call for it. not including on UI for now. 
         /// </summary>
         /// <param name="pam">Dto for Production Add</param>
         /// <returns>OK result on success, Bad Request on failure</returns>
@@ -73,7 +73,10 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
                     x.Manufacturer.Trim().Equals(pam.Manufacturer.Trim(), StringComparison.InvariantCultureIgnoreCase) &&
                     x.Manufacturer.Trim().Equals(pam.Name.Trim(), StringComparison.InvariantCultureIgnoreCase)))
             {
-                return BadRequest();
+                return BadRequest(new
+                {
+                    response = "Duplicate Product Found"
+                });
             }
             
             _context.Products.Add(new Products
@@ -88,7 +91,10 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
                 QtyOnHand = pam.QtyOnHand
             });
 
-            return Ok();
+            return Ok(new
+            {
+                response = "Success"
+            });
         }
     }
 }
