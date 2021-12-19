@@ -38,13 +38,19 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
             var result = _context.Products.FirstOrDefault(x => x.ProductId == pum.ProductId);
             var products = _context.Products;
 
-            if (result == null || products.Any(x =>
-                    x.Manufacturer.Trim().Equals(pum.Manufacturer.Trim(), StringComparison.InvariantCultureIgnoreCase) &&
-                    x.Manufacturer.Trim().Equals(pum.Name.Trim(), StringComparison.InvariantCultureIgnoreCase)))
+            if (pum.Manufacturer != null || pum.Name != null)
             {
-                return BadRequest();
+                if (result == null || products.Any(x =>
+                        x.Manufacturer.Trim().Equals(pum.Manufacturer.Trim(), StringComparison.InvariantCultureIgnoreCase) &&
+                        x.Name.Trim().Equals(pum.Name.Trim(), StringComparison.InvariantCultureIgnoreCase)))
+                {
+                    return BadRequest(new
+                    {
+                        response = "Duplicate Product Found"
+                    });
+                }
             }
-
+            
             result.Manufacturer = pum.Manufacturer ?? result.Manufacturer;
             result.Name = pum.Name ?? result.Name;
             result.Style = pum.Style ?? result.Style;
@@ -53,7 +59,10 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
             result.SalePrice = pum.SalePrice ?? result.SalePrice;
             result.QtyOnHand = pum.QtyOnHand ?? result.QtyOnHand;
 
-            return Ok();
+            return Ok(new
+            {
+                response = "Success"
+            });
         }
 
         /// <summary>

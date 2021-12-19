@@ -67,6 +67,14 @@ export default {
 
       let payload = this.productModel;
 
+      if(this.productModel.manufacturer === this.product.manufacturer){
+        delete this.productModel.manufacturer;
+      }
+
+      if(this.productModel.name === this.product.name){
+        delete this.productModel.name;
+      }
+
       axios({
         method: 'post',
         url: this.$hostname + 'products/update',
@@ -75,8 +83,11 @@ export default {
           'Content-type': 'application/json'
         },
         data: JSON.stringify(payload)
-      }).then(response => console.log(response))
-      .catch(err => console.log(err));
+      }).then(response => {
+        console.log(response.data);
+        alert("Success");
+        this.$emit('update', true);
+      }).catch(err => alert(err.response.data.response));
     }
   }
 }
