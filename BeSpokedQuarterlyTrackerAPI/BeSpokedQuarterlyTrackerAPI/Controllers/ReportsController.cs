@@ -48,8 +48,8 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
                 SalesPersonId = x.SalesPerson.SalespersonId,
                 SalesId = x.SalesId,
                 SaleDate = x.SalesDate,
-                Price = x.Product.SalePrice,
-                Commission = x.Product.SalePrice * (x.Product.CommissionPct / 100),
+                Price = x.SalePrice,
+                Commission = x.CommissionAwarded,
                 CustomerName = x.Customer.FirstName.Trim() + " " + x.Customer.LastName.Trim()
             }).GroupBy(x => x.SalesPersonId).Select(y => new
             {
