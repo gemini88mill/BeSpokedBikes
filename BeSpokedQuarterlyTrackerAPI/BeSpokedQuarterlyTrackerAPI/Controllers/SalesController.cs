@@ -63,21 +63,19 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
             var product = _context.Products.FirstOrDefault(x => x.ProductId == nsm.ProductId);
             var salesCount = _context.Sales.Count + 1;
 
-            if (product != null)
+            if (product == null) return BadRequest();
+            _context.Sales.Add(new Sales
             {
-                _context.Sales.Add(new Sales
-                {
-                    Customer = customers,
-                    Product = product,
-                    SalesPerson = salesperson,
-                    SalesDate = DateTime.Now,
-                    SalesId = salesCount,
-                    SalePrice = product.SalePrice,
-                    CommissionAwarded = product.SalePrice * (product.CommissionPct / 100)
-                });
+                Customer = customers,
+                Product = product,
+                SalesPerson = salesperson,
+                SalesDate = DateTime.Now,
+                SalesId = salesCount,
+                SalePrice = product.SalePrice,
+                CommissionAwarded = product.SalePrice * (product.CommissionPct / 100)
+            });
                 
-                product.QtyOnHand--;
-            }
+            product.QtyOnHand--;
 
             return Ok();
         }
