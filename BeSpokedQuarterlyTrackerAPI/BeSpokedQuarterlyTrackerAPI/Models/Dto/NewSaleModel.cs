@@ -17,5 +17,7 @@ namespace BeSpokedQuarterlyTrackerAPI.Models.Dto
         public decimal Price { get; set; }
         public string SalesPersonName { get; set; }
         public decimal Commission { get; set; }
+
+        public string ProductName { get; set; }
     }
 }

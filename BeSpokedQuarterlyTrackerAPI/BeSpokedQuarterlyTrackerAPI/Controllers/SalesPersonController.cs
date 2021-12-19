@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using BeSpokedQuarterlyTrackerAPI.Models;
 using BeSpokedQuarterlyTrackerAPI.Models.Dto;
@@ -23,7 +24,17 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
         [HttpGet]
         public IActionResult GetSalesPersons()
         {
-            return Ok(_context.SalesPersons);
+            var salespersonView = _context.SalesPersons.Select(item => new SalesPersonModelView
+                {
+                    Name = item.FirstName.Trim() + " " + item.LastName.Trim(),
+                    Address = item.Address,
+                    Manager = item.Manager,
+                    Phone = item.Phone,
+                    SalesPersonId = item.SalespersonId
+                })
+                .ToList();
+
+            return Ok(salespersonView);
         }
 
         /// <summary>

@@ -41,7 +41,8 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
                     SaleDate = item.SalesDate,
                     Price = item.SalePrice,
                     Commission = item.CommissionAwarded,
-                    CustomerName = item.Customer.FirstName.Trim() + " " + item.Customer.LastName.Trim()
+                    CustomerName = item.Customer.FirstName.Trim() + " " + item.Customer.LastName.Trim(),
+                    ProductName = item.Product.Manufacturer.Trim() + " - " + item.Product.Name.Trim()
                 });
             }
 
@@ -63,6 +64,7 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
             var salesCount = _context.Sales.Count + 1;
 
             if (product != null)
+            {
                 _context.Sales.Add(new Sales
                 {
                     Customer = customers,
@@ -73,6 +75,9 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
                     SalePrice = product.SalePrice,
                     CommissionAwarded = product.SalePrice * (product.CommissionPct / 100)
                 });
+                
+                product.QtyOnHand--;
+            }
 
             return Ok();
         }
