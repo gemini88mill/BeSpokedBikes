@@ -20,7 +20,7 @@
       </div>
       <div class="row">
         <transition name="component-fade" mode="out-in">
-          <component v-bind:is="view" :sales-people="users"></component>
+          <component v-bind:is="view" :sales-people="users" @update="updateSalesPeople"></component>
         </transition>
 <!--        <sales-people :sales-people="users"></sales-people>-->
       </div>
@@ -60,6 +60,18 @@ export default {
       }
     }).then(response => this.users = response.data)
     .catch(err => console.log(err))
+  },
+  methods: {
+    updateSalesPeople: function (){
+      axios({
+        method: 'get',
+        url: this.$hostname + 'salesperson',
+        headers: {
+          'Access-Control-Allow-Origin': '*'
+        }
+      }).then(response => this.users = response.data)
+          .catch(err => console.log(err))
+    }
   }
 }
 </script>

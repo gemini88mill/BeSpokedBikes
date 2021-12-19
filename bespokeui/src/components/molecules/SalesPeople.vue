@@ -9,7 +9,7 @@
       <div class="col text-muted"></div>
     </div>
     <div class="row mb-3" v-for="item in salesPeople" :key="item.index">
-      <sales-person :sales-person="item" @saleEvent="createSale"></sales-person>
+      <sales-person :sales-person="item" @saleEvent="createSale" @update="updateSalesPeople"></sales-person>
     </div>
     <div class="row" v-show="createSaleView === true">
       <create-sale :sales-person-id="salesPerson"></create-sale>
@@ -37,6 +37,9 @@ export default {
       this.createSaleView = true;
       this.salesPerson = val;
 
+    },
+    updateSalesPeople: function(){
+      this.$emit('update', true);
     }
   }
 }

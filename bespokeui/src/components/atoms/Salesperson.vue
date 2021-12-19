@@ -72,8 +72,8 @@ export default {
 
       let payload = {
         salesPersonId: this.salesPerson.salesPersonId,
-        firstName: nameArr[0],
-        lastName: nameArr.length > 1 ? nameArr[nameArr.length - 1] : '',
+        firstName: this.salesPersonAdd.name === this.salesPerson.name ? null : nameArr[0],
+        lastName: this.salesPersonAdd.name === this.salesPerson.name ? null : nameArr.length > 1 ? nameArr[nameArr.length - 1] : '',
         address: this.salesPersonAdd.address,
         phone: this.salesPersonAdd.phone,
         manager: this.salesPersonAdd.manager
@@ -87,10 +87,20 @@ export default {
           'Content-type': 'application/json'
         },
         data: JSON.stringify(payload)
-      }).then(response => alert("Success, salesperson updated" + response))
+      }).then(response => {
+        alert(response.data.response)
+        this.$emit('update', true)
+      })
       .catch(err => {
         console.log(err);
-        alert("something went wrong, please see console for details")
+        alert(err.response.data.response)
+
+        this.salesPersonAdd = {
+          name: this.salesPerson.name,
+          address: this.salesPerson.address,
+          phone: this.salesPerson.phone,
+          manager: this.salesPerson.manager
+        }
       })
     },
     splitName: function (val) {

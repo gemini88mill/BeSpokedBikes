@@ -51,15 +51,19 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
             var result = _context.SalesPersons.FirstOrDefault(x => x.SalespersonId == uspm.SalesPersonId);
             var salesPeople = _context.SalesPersons;
 
-            if (result == null || salesPeople.Any(x =>
-                    x.FirstName.Trim().Equals(uspm.FirstName.Trim(), StringComparison.InvariantCultureIgnoreCase) &&
-                    x.LastName.Trim().Equals(uspm.LastName, StringComparison.InvariantCultureIgnoreCase)))
+            if (uspm.FirstName != null || uspm.LastName != null)
             {
-                return BadRequest(new
+                if (result == null || salesPeople.Any(x =>
+                        x.FirstName.Trim().Equals(uspm.FirstName.Trim(), StringComparison.InvariantCultureIgnoreCase) &&
+                        x.LastName.Trim().Equals(uspm.LastName, StringComparison.InvariantCultureIgnoreCase)))
                 {
-                    response = result == null ? "Salesperson not found" : "Duplicate Name Found"
-                });
+                    return BadRequest(new
+                    {
+                        response = result == null ? "Salesperson not found" : "Duplicate Name Found"
+                    });
+                }
             }
+            
             
             result.Address = uspm.Address ?? result.Address;
             result.Manager = uspm.Manager ?? result.Manager;
