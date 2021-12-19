@@ -57,7 +57,9 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
         }
 
         /// <summary>
-        /// Product Add, controller method to add new products to inventory, includes a check for product duplicates. 
+        /// Product Add, controller method to add new products to inventory, includes a check for product duplicates.
+        /// Note: the requirements do not state for this to be added to the system. It is possible that a future update
+        /// might require this to be needed but the current iteration does not call for it. leaving hidden for now. 
         /// </summary>
         /// <param name="pam">Dto for Production Add</param>
         /// <returns>OK result on success, Bad Request on failure</returns>

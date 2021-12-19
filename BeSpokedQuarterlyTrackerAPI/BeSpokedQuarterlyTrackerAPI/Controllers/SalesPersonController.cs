@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using BeSpokedQuarterlyTrackerAPI.Models;
@@ -48,8 +49,14 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
         public IActionResult UpdateSalesPerson(UpdateSalesPersonModel uspm)
         {
             var result = _context.SalesPersons.FirstOrDefault(x => x.SalespersonId == uspm.SalesPersonId);
+            var salesPeople = _context.SalesPersons;
 
-            if (result == null) return BadRequest();
+            if (result == null || salesPeople.Any(x =>
+                    x.FirstName.Trim().Equals(uspm.FirstName.Trim(), StringComparison.InvariantCultureIgnoreCase) &&
+                    x.LastName.Trim().Equals(uspm.LastName, StringComparison.InvariantCultureIgnoreCase)))
+            {
+                return BadRequest();
+            }
             
             result.Address = uspm.Address ?? result.Address;
             result.Manager = uspm.Manager ?? result.Manager;
