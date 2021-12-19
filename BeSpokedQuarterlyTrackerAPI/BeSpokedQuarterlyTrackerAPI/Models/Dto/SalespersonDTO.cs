@@ -1,3 +1,5 @@
+using System;
+
 namespace BeSpokedQuarterlyTrackerAPI.Models.Dto
 {
     public class SalespersonDTO
@@ -12,6 +14,9 @@ namespace BeSpokedQuarterlyTrackerAPI.Models.Dto
         public string Address { get; set; }
         public string Phone { get; set; }
         public string Manager { get; set; }
+
+        public DateTime StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
     }
 
     public class UpdateSalesPersonModel

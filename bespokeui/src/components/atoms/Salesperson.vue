@@ -1,12 +1,12 @@
 <template>
   <div class="container">
-    <div class="row" v-if="!editMode">
+    <div class="row" :class="checkTerm" v-if="!editMode">
       <div class="col"><p>{{salesPerson.name}}</p></div>
       <div class="col"><p>{{salesPerson.manager}}</p></div>
       <div class="col">
         <div class="btn-group">
           <button class="btn btn-warning" @click="editMode = !editMode" type="button">Edit</button>
-          <button class="btn btn-success" type="button" @click="addSale()">Sale</button>
+          <button class="btn btn-success" type="button" @click="addSale()" :disabled="isInvalidUser">Sale</button>
         </div>
       </div>
     </div>
@@ -46,7 +46,9 @@ export default {
       manager: String,
       phone: String,
       salesPersonId: Number,
-      address: String
+      address: String,
+      startDate: Date,
+      endDate: Date
     },
     editModePar: Boolean
   },
@@ -105,6 +107,20 @@ export default {
     },
     splitName: function (val) {
       return val.split(' ');
+    }
+  },
+  computed: {
+    checkTerm: function(){
+      if(this.salesPerson.endDate < Date.now || this.salesPerson.startDate > Date.now){
+        return {
+          'text-muted': true
+        }
+      } else{
+        return {}
+      }
+    },
+    isInvalidUser: function(){
+      return this.salesPerson.endDate < Date.now || this.salesPerson.startDate > Date.now
     }
   }
 }

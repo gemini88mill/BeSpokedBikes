@@ -31,7 +31,9 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
                     Address = item.Address,
                     Manager = item.Manager,
                     Phone = item.Phone,
-                    SalesPersonId = item.SalespersonId
+                    SalesPersonId = item.SalespersonId,
+                    StartDate = item.StartDate,
+                    EndDate = item.TerminationDate 
                 })
                 .ToList();
 
