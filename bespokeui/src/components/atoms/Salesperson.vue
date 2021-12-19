@@ -72,8 +72,8 @@ export default {
 
       let payload = {
         salesPersonId: this.salesPerson.salesPersonId,
-        firstName: this.salesPersonAdd.name === this.salesPerson.name ? null : nameArr[0],
-        lastName: this.salesPersonAdd.name === this.salesPerson.name ? null : nameArr.length > 1 ? nameArr[nameArr.length - 1] : '',
+        firstName: nameArr[0],
+        lastName: nameArr.length > 1 ? nameArr[nameArr.length - 1] : '',
         address: this.salesPersonAdd.address,
         phone: this.salesPersonAdd.phone,
         manager: this.salesPersonAdd.manager

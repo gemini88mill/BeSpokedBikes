@@ -49,20 +49,18 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
         public IActionResult UpdateSalesPerson(UpdateSalesPersonModel uspm)
         {
             var result = _context.SalesPersons.FirstOrDefault(x => x.SalespersonId == uspm.SalesPersonId);
-            var salesPeople = _context.SalesPersons;
-
-            if (uspm.FirstName != null || uspm.LastName != null)
+            var salesPeople = _context.SalesPersons.Where(x => result.SalespersonId != x.SalespersonId);
+            
+            if (result == null || salesPeople.Any(x =>
+                    x.FirstName.Trim().Equals(uspm.FirstName.Trim(), StringComparison.InvariantCultureIgnoreCase) &&
+                    x.LastName.Trim().Equals(uspm.LastName, StringComparison.InvariantCultureIgnoreCase)))
             {
-                if (result == null || salesPeople.Any(x =>
-                        x.FirstName.Trim().Equals(uspm.FirstName.Trim(), StringComparison.InvariantCultureIgnoreCase) &&
-                        x.LastName.Trim().Equals(uspm.LastName, StringComparison.InvariantCultureIgnoreCase)))
+                return BadRequest(new
                 {
-                    return BadRequest(new
-                    {
-                        response = result == null ? "Salesperson not found" : "Duplicate Name Found"
-                    });
-                }
+                    response = result == null ? "Salesperson not found" : "Duplicate Name Found"
+                });
             }
+            
             
             
             result.Address = uspm.Address ?? result.Address;

@@ -67,14 +67,6 @@ export default {
 
       let payload = this.productModel;
 
-      if(this.productModel.manufacturer === this.product.manufacturer){
-        delete this.productModel.manufacturer;
-      }
-
-      if(this.productModel.name === this.product.name){
-        delete this.productModel.name;
-      }
-
       axios({
         method: 'post',
         url: this.$hostname + 'products/update',

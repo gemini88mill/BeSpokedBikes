@@ -36,20 +36,18 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
         public IActionResult UpdateProduct(ProductUpdateModel pum)
         {
             var result = _context.Products.FirstOrDefault(x => x.ProductId == pum.ProductId);
-            var products = _context.Products;
-
-            if (pum.Manufacturer != null || pum.Name != null)
+            var products = _context.Products.Where(x => result.ProductId != x.ProductId);
+            
+            if (result == null || products.Any(x =>
+                    x.Manufacturer.Trim().Equals(pum.Manufacturer.Trim(), StringComparison.InvariantCultureIgnoreCase) &&
+                    x.Name.Trim().Equals(pum.Name.Trim(), StringComparison.InvariantCultureIgnoreCase)))
             {
-                if (result == null || products.Any(x =>
-                        x.Manufacturer.Trim().Equals(pum.Manufacturer.Trim(), StringComparison.InvariantCultureIgnoreCase) &&
-                        x.Name.Trim().Equals(pum.Name.Trim(), StringComparison.InvariantCultureIgnoreCase)))
+                return BadRequest(new
                 {
-                    return BadRequest(new
-                    {
-                        response = "Duplicate Product Found"
-                    });
-                }
+                    response = "Duplicate Product Found"
+                });
             }
+            
             
             result.Manufacturer = pum.Manufacturer ?? result.Manufacturer;
             result.Name = pum.Name ?? result.Name;
