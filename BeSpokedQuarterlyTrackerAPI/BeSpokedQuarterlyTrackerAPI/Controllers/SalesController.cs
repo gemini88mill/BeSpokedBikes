@@ -65,11 +65,13 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
                 Product = product,
                 SalesPerson = salesperson,
                 SalesDate = DateTime.Now,
-                SalePrice = product.SalePrice,
-                CommissionAwarded = product.SalePrice * (product.CommissionPct / 100)
+                SalePrice = nsm.SalePrice,
+                CommissionAwarded = nsm.CommissionAwarded
             });
                 
             product.QtyOnHand--;
+
+            _context.SaveChanges();
 
             return Ok(new
             {

@@ -66,6 +66,8 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
             result.FirstName = uspm.FirstName ?? result.FirstName;
             result.LastName = uspm.LastName ?? result.LastName;
 
+            _context.SaveChanges();
+
             return Ok(new
             {
                 response = "success"

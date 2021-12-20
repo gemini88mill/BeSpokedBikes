@@ -6,6 +6,7 @@ using BeSpokedQuarterlyTrackerAPI.Common;
 using BeSpokedQuarterlyTrackerAPI.Models;
 using BeSpokedQuarterlyTrackerAPI.Models.Dto;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BeSpokedQuarterlyTrackerAPI.Controllers
 {
@@ -25,14 +26,28 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
         public IActionResult GetQuarterlyReport(ReportPeramsModel rpm)
         {
             var dateRange = DateMath.GetDateRange(rpm.Qtr, rpm.Year);
+
+            var salesList = _context.Sales
+                .Include(x => x.Customer)
+                .Include(x => x.Product)
+                .Include(x => x.SalesPerson)
+                .ToList();
+
+            if (rpm.SalesPersonId != null)
+            {
+                salesList = salesList.Where(x => x.SalesPerson.SalespersonId == rpm.SalesPersonId).ToList();
+            }
+
+            salesList = salesList.Where(x => x.SalesDate >= dateRange.StartDate && x.SalesDate <= dateRange.EndDate)
+                .ToList();
             
-            List<Sales> salesList = new List<Sales>();
-            salesList.AddRange(rpm.SalesPersonId != null
-                ? _context.Sales.Where(x =>
-                    x.SalesPerson.SalespersonId == rpm.SalesPersonId && x.SalesDate <= dateRange.EndDate &&
-                    x.SalesDate >= dateRange.StartDate).ToList()
-                : _context.Sales.Where(x =>
-                    x.SalesDate <= dateRange.EndDate && x.SalesDate >= dateRange.StartDate).ToList());
+            // List<Sales> salesList = new List<Sales>();
+            // salesList.AddRange(rpm.SalesPersonId != null
+            //     ? _context.Sales.Where(x =>
+            //         x.SalesPerson.SalespersonId == rpm.SalesPersonId && x.SalesDate <= dateRange.EndDate &&
+            //         x.SalesDate >= dateRange.StartDate).ToList()
+            //     : _context.Sales.Where(x =>
+            //         x.SalesDate <= dateRange.EndDate && x.SalesDate >= dateRange.StartDate).ToList());
 
             return Ok(salesList.Select(x => new 
             {

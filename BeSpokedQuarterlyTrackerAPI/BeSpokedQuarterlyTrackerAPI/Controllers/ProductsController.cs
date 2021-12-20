@@ -34,8 +34,8 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
             var products = _context.Products.Where(x => result.ProductId != x.ProductId);
             
             if (result == null || products.Any(x =>
-                    x.Manufacturer.Trim().Equals(pum.Manufacturer.Trim(), StringComparison.InvariantCultureIgnoreCase) &&
-                    x.Name.Trim().Equals(pum.Name.Trim(), StringComparison.InvariantCultureIgnoreCase)))
+                    x.Manufacturer.Trim().Equals(pum.Manufacturer.Trim()) &&
+                    x.Name.Trim().Equals(pum.Name.Trim())))
             {
                 return BadRequest(new
                 {
@@ -51,6 +51,8 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
             result.PurchasePrice = pum.PurchasePrice ?? result.PurchasePrice;
             result.SalePrice = pum.SalePrice ?? result.SalePrice;
             result.QtyOnHand = pum.QtyOnHand ?? result.QtyOnHand;
+
+            _context.SaveChanges();
 
             return Ok(new
             {

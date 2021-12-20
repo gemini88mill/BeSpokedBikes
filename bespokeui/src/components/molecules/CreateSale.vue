@@ -117,7 +117,9 @@ export default {
       let payload = {
         salesPersonId: this.salesPersonId,
         customerId: this.customerSelected,
-        productId: this.productSelected
+        productId: this.productSelected,
+        salePrice: this.salePrice,
+        commissionAwarded: this.salePrice * (this.currentProductPrice.commissionPct / 100)
       }
 
       console.log(payload);
