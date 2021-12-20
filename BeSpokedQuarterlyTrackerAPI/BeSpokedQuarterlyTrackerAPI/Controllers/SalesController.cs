@@ -36,7 +36,7 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
                     CustomerName = item.Customer.FirstName.Trim() + " " + item.Customer.LastName.Trim(),
                     ProductName = item.Product.Manufacturer.Trim() + " - " + item.Product.Name.Trim()
                 })
-                .ToList();
+                .ToList().OrderBy(y => y.ProductName);
 
             return Ok(displaySalesList);
         }
