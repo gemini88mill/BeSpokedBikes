@@ -49,8 +49,8 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
             var salesPeople = _context.SalesPersons.Where(x => result.SalespersonId != x.SalespersonId);
             
             if (result == null || salesPeople.Any(x =>
-                    x.FirstName.Trim().Equals(uspm.FirstName.Trim(), StringComparison.InvariantCultureIgnoreCase) &&
-                    x.LastName.Trim().Equals(uspm.LastName, StringComparison.InvariantCultureIgnoreCase)))
+                    x.FirstName.ToLower().Trim().Equals(uspm.FirstName.ToLower().Trim()) &&
+                    x.LastName.ToLower().Trim().Equals(uspm.LastName.ToLower().Trim())))
             {
                 return BadRequest(new
                 {
