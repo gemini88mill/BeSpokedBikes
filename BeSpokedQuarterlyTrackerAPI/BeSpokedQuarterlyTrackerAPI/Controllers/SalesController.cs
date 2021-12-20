@@ -15,9 +15,9 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
     public class SalesController : ControllerBase
     {
         // DI Component from startup.cs
-        private BeSpokeContext _context { get; }
-
-        public SalesController(BeSpokeContext context)
+        private BespokeDbContext _context { get; set; }
+        
+        public SalesController(BespokeDbContext context)
         {
             _context = context;
         }
@@ -61,7 +61,6 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
             var customers = _context.Customers.FirstOrDefault(x => x.CustomerId == nsm.CustomerId);
             var salesperson = _context.SalesPersons.FirstOrDefault(x => x.SalespersonId == nsm.SalesPersonId);
             var product = _context.Products.FirstOrDefault(x => x.ProductId == nsm.ProductId);
-            var salesCount = _context.Sales.Count + 1;
 
             if (product == null) return BadRequest(new
             {
@@ -74,7 +73,6 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
                 Product = product,
                 SalesPerson = salesperson,
                 SalesDate = DateTime.Now,
-                SalesId = salesCount,
                 SalePrice = product.SalePrice,
                 CommissionAwarded = product.SalePrice * (product.CommissionPct / 100)
             });

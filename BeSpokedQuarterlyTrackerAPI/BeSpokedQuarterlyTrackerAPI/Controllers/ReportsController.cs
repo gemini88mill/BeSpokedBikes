@@ -13,13 +13,10 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
     [Route("[controller]")]
     public class ReportsController : ControllerBase
     {
-        private BeSpokeContext _context { get; }
-
-        /// <summary>
-        /// Controller Constructor, Dependency Injected from Startup.cs
-        /// </summary>
-        /// <param name="context"></param>
-        public ReportsController(BeSpokeContext context)
+        //DI 
+        private BespokeDbContext _context { get; set; }
+        
+        public ReportsController(BespokeDbContext context)
         {
             _context = context;
         }

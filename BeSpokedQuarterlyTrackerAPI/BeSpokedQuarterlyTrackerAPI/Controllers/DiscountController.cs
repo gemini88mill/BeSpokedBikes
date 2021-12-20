@@ -9,9 +9,9 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
     public class DiscountController : ControllerBase
     {
         // DI Component from startup.cs
-        private BeSpokeContext _context { get; }
-
-        public DiscountController(BeSpokeContext context)
+        private BespokeDbContext _context { get; set; }
+        
+        public DiscountController(BespokeDbContext context)
         {
             _context = context;
         }

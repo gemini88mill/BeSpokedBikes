@@ -11,9 +11,9 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
     [Route("[controller]")]
     public class SalesPersonController : ControllerBase
     {
-        private BeSpokeContext _context { get; set; }
-
-        public SalesPersonController(BeSpokeContext context)
+        private BespokeDbContext _context { get; set; }
+        
+        public SalesPersonController(BespokeDbContext context)
         {
             _context = context;
         }

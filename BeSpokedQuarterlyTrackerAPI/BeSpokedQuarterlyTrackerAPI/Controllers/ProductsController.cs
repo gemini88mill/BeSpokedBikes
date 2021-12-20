@@ -10,9 +10,9 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
     [Route("[controller]")]
     public class ProductsController : ControllerBase
     {
-        private BeSpokeContext _context { get; }
-
-        public ProductsController(BeSpokeContext context)
+        private BespokeDbContext _context { get; set; }
+        
+        public ProductsController(BespokeDbContext context)
         {
             _context = context;
         }
@@ -92,7 +92,6 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
                 Manufacturer = pam.Manufacturer,
                 Style = pam.Style,
                 CommissionPct = pam.CommissionPct,
-                ProductId = _context.Products.Count + 1,
                 PurchasePrice = pam.PurchasePrice,
                 SalePrice = pam.SalePrice,
                 QtyOnHand = pam.QtyOnHand

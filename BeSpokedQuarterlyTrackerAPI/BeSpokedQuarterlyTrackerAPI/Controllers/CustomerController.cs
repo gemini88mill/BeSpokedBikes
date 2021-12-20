@@ -15,9 +15,9 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
     public class CustomerController : ControllerBase
     {
         //DI 
-        private BeSpokeContext _context { get; set; }
+        private BespokeDbContext _context { get; set; }
         
-        public CustomerController(BeSpokeContext context)
+        public CustomerController(BespokeDbContext context)
         {
             _context = context;
         }
