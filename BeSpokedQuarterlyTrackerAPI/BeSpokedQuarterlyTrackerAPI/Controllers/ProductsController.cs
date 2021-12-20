@@ -34,8 +34,8 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
             var products = _context.Products.Where(x => result.ProductId != x.ProductId);
             
             if (result == null || products.Any(x =>
-                    x.Manufacturer.Trim().Equals(pum.Manufacturer.Trim()) &&
-                    x.Name.Trim().Equals(pum.Name.Trim())))
+                    x.Manufacturer.ToLower().Trim().Equals(pum.Manufacturer.ToLower().Trim()) &&
+                    x.Name.ToLower().Trim().Equals(pum.Name.ToLower().Trim())))
             {
                 return BadRequest(new
                 {
