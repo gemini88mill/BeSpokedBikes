@@ -1,10 +1,12 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace BeSpokedQuarterlyTrackerAPI.Models
 {
     // Note if the Product changes, the commission could be effected? 
     public class Sales
     {
+        [Key]
         public int SalesId { get; set; }
         public Products Product { get; set; }
         public SalesPerson SalesPerson { get; set; }
