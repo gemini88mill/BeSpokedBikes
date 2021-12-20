@@ -41,15 +41,8 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
             salesList = salesList.Where(x => x.SalesDate >= dateRange.StartDate && x.SalesDate <= dateRange.EndDate)
                 .ToList();
             
-            // List<Sales> salesList = new List<Sales>();
-            // salesList.AddRange(rpm.SalesPersonId != null
-            //     ? _context.Sales.Where(x =>
-            //         x.SalesPerson.SalespersonId == rpm.SalesPersonId && x.SalesDate <= dateRange.EndDate &&
-            //         x.SalesDate >= dateRange.StartDate).ToList()
-            //     : _context.Sales.Where(x =>
-            //         x.SalesDate <= dateRange.EndDate && x.SalesDate >= dateRange.StartDate).ToList());
 
-            return Ok(salesList.Select(x => new 
+            return Ok(salesList.Select(x => new
             {
                 SalesPersonName = x.SalesPerson.FirstName.Trim() + " " + x.SalesPerson.LastName.Trim(),
                 SalesPersonId = x.SalesPerson.SalespersonId,
@@ -57,7 +50,7 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
                 SaleDate = x.SalesDate,
                 Price = x.SalePrice,
                 Commission = x.CommissionAwarded,
-                CustomerName = x.Customer.FirstName.Trim() + " " + x.Customer.LastName.Trim()
+                // CustomerName = x.Customer.FirstName.Trim() + " " + x.Customer.LastName.Trim()
             }).GroupBy(x => x.SalesPersonId).Select(y => new
             {
                 y.Key,
@@ -66,6 +59,7 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
                 CommissionTotal = y.Sum(x => x.Commission),
                 TotalSales = y.Sum(x => x.Price)
             }));
+            
         }
     }
 }
