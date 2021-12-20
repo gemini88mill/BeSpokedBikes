@@ -15,12 +15,7 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
     public class SalesController : ControllerBase
     {
         // DI Component from startup.cs
-        private BespokeDbContext _context { get; set; }
-        
-        public SalesController(BespokeDbContext context)
-        {
-            _context = context;
-        }
+        private BespokeDbContext _context = new BespokeDbContext();
         
         /// <summary>
         /// Gets all sales uses Dto model to display relevant data. 
@@ -31,10 +26,7 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
         {
             var allSales = _context.Sales;
 
-            var displaySalesList = new List<DisplaySalesModel>();
-            foreach (var item in allSales)
-            {
-                displaySalesList.Add(new DisplaySalesModel
+            var displaySalesList = allSales.Select(item => new DisplaySalesModel
                 {
                     SalesPersonName = item.SalesPerson.FirstName.Trim() + " " + item.SalesPerson.LastName.Trim(),
                     SalesId = item.SalesId,
@@ -43,8 +35,8 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
                     Commission = item.CommissionAwarded,
                     CustomerName = item.Customer.FirstName.Trim() + " " + item.Customer.LastName.Trim(),
                     ProductName = item.Product.Manufacturer.Trim() + " - " + item.Product.Name.Trim()
-                });
-            }
+                })
+                .ToList();
 
             return Ok(displaySalesList);
         }

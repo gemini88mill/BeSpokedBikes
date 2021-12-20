@@ -15,12 +15,7 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
     public class CustomerController : ControllerBase
     {
         //DI 
-        private BespokeDbContext _context { get; set; }
-        
-        public CustomerController(BespokeDbContext context)
-        {
-            _context = context;
-        }
+        private BespokeDbContext _context = new BespokeDbContext();
         
         /// <summary>
         /// Gets the complete list of customers. 

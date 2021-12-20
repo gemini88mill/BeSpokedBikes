@@ -14,12 +14,7 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
     public class ReportsController : ControllerBase
     {
         //DI 
-        private BespokeDbContext _context { get; set; }
-        
-        public ReportsController(BespokeDbContext context)
-        {
-            _context = context;
-        }
+        private BespokeDbContext _context = new BespokeDbContext();
 
         /// <summary>
         /// Quarterly Summary report controller - gets the sales information and groups the data by salesperson. 

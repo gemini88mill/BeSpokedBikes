@@ -10,12 +10,7 @@ namespace BeSpokedQuarterlyTrackerAPI.Controllers
     [Route("[controller]")]
     public class ProductsController : ControllerBase
     {
-        private BespokeDbContext _context { get; set; }
-        
-        public ProductsController(BespokeDbContext context)
-        {
-            _context = context;
-        }
+        private BespokeDbContext _context = new BespokeDbContext();
 
         /// <summary>
         /// Display a list of products
